@@ -1,3 +1,5 @@
+import java.io.*;
+
 import static java.lang.Character.isLowerCase;
 import static java.lang.Character.isUpperCase;
 import static java.lang.Character.toLowerCase;
@@ -69,6 +71,42 @@ public class ROT13 {
         }
 
         return rotatedString;
+    }
+
+    public void encryptTextFile(File file){
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("sonnet18.enc")));
+            String line;
+            while((line = reader.readLine()) != null){
+                writer.write(encrypt(line) + "\n");
+            }
+            reader.close();
+            writer.close();
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void decryptTextFile(File file){
+
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File("sonnet18.dec")));
+            String line;
+            while((line = reader.readLine()) != null){
+                writer.write(encrypt(line) + "\n");
+            }
+            reader.close();
+            writer.close();
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
 
 }
